@@ -219,7 +219,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
             Expanded(
               flex: 3,
               child:
-              taxiBooking.coPassengers!.isEmpty?
+              passengerList.isEmpty?
               Container(
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
@@ -229,7 +229,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
               ):
               GestureDetector(
                 onTap: (){
-                  showEmployeeDetails(taxiBooking.coPassengers);
+                  showEmployeeDetails(passengerList);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
