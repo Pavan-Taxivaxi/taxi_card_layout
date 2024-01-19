@@ -24,6 +24,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
         )
     );
   }
+
   TaxiBooking taxiBooking = TaxiBooking(
     referenceNo: data.referenceNo,
     tourType: data.tourType,
