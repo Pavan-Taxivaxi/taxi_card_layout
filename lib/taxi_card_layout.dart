@@ -1,6 +1,7 @@
 library taxi_card_layout;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +20,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
     pickupLocation: data.pickupLocation,
     statusTv: data.statusTv,
     statusCompany: data.statusCompany,
+    coPassengers: data.coPassengers,
   );
 
   DateTime formattedDate(String strDate){
@@ -30,6 +32,59 @@ Widget taxiCardLayout(BuildContext context,var data ){
     String formatter= DateFormat("MMM").format(dateTime) ;
     return formatter;
   }
+
+  showEmployeeDetails(List<CoPassenger>? people){
+    showDialog(context: context, builder: (BuildContext buContext){
+      return AlertDialog(
+        content: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 300,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                      flex: 5,
+                      child: Container(
+                          alignment: Alignment.center,
+                          child: Text("Employee Details",style: GoogleFonts.lato(fontWeight: FontWeight.w700,fontSize: 20),))),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          onPressed: (){Navigator.pop(context);},
+                          icon: const Icon(Icons.cancel_outlined)),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                    itemCount: people!.length,
+                    itemBuilder: (BuildContext context,int index){
+                      return ListTile(
+                        trailing: IconButton(
+                          icon: const Icon(Icons.call,color: Colors.green,),
+                          onPressed: ()async{
+                             await FlutterPhoneDirectCaller.callNumber(people[index].peopleContact.toString());
+                          },
+                        ),
+                        subtitle: Text("${people[index].peopleContact}\n${people[index].peopleEmail}"),
+                        title: Text(people[index].peopleName!,style: GoogleFonts.lato(textStyle: const TextStyle(fontSize: 16,fontWeight: FontWeight.w600)),),
+                      );
+                    }
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    });
+  }
+
 
   return Card(
     elevation: 5,
@@ -152,13 +207,54 @@ Widget taxiCardLayout(BuildContext context,var data ){
             Expanded(
               flex: 3,
               child:
+              taxiBooking.coPassengers!.isEmpty?
               Container(
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     "No Co-passengers",
                     style: GoogleFonts.lato(fontSize: Constants.subHeader),
                   )
-              )
+              ):
+              GestureDetector(
+                onTap: (){
+                  showEmployeeDetails(taxiBooking.coPassengers);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        flex: 3,
+                        child: Container(
+                            padding: const EdgeInsets.only(left: 10),
+                            alignment:Alignment.topLeft,
+                            child: Text(
+                              "People",
+                              style: GoogleFonts.lato(fontSize: Constants.subHeader),
+                            )
+                        )
+                    ),
+                    Expanded(
+                        flex: 4,
+                        child: Row(
+                          children: [
+                            Container(
+                                padding: const EdgeInsets.only(right: 5),
+                                alignment:Alignment.topLeft,
+                                child: Text(
+                                    taxiBooking.coPassengers!.length.toString(),
+                                    style: GoogleFonts.lato(fontWeight: FontWeight.w600,fontSize: Constants.subHeader)
+                                )
+                            ),
+
+                            Icon(Icons.info_outline,size: Constants.iconSizeCard,)
+                          ],
+                        )
+                    ),
+
+                  ],
+                ),
+              ),
             )
           ],
         ),
