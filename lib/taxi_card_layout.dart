@@ -14,7 +14,7 @@ import 'constants.dart';
 Widget taxiCardLayout(BuildContext context,var data ){
 
   List<Passenger> passengerList =[];
-  for(int i=0;i<data.coPassenger.length;i++){
+  for(int i=0;i<data.coPassengers.length;i++){
     passengerList.add(
         Passenger(
           peopleName: data.coPassengers[i].peopleName,
