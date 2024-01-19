@@ -10,7 +10,7 @@ import 'package:taxi_card_layout/tv_theme.dart';
 import 'constants.dart';
 
 
-Widget taxiCardLayout(Booking taxiBooking, BuildContext context){
+Widget taxiCardLayout(TaxiBooking taxiBooking, BuildContext context){
   DateTime formattedDate(String strDate){
     DateTime formatter = DateFormat('dd MMM yyyy - HH:mm a').parse(strDate);
     DateTime inputDate = DateTime.parse(formatter.toString());

@@ -1,5 +1,5 @@
 
-class Booking {
+class TaxiBooking {
   String? bookingId;
   String? referenceNo;
   String? tourType;
@@ -20,7 +20,7 @@ class Booking {
   String? statusTv;
   int? isCancelAllowed;
 
-  Booking({
+  TaxiBooking({
     this.bookingId,
     this.referenceNo,
     this.tourType,
@@ -42,7 +42,7 @@ class Booking {
     this.isCancelAllowed,
   });
 
-  factory Booking.fromJson(Map<String, dynamic> json) => Booking(
+  factory TaxiBooking.fromJson(Map<String, dynamic> json) => TaxiBooking(
     bookingId: json["booking_id"],
     referenceNo: json["reference_no"],
     tourType: json["tour_type"],
