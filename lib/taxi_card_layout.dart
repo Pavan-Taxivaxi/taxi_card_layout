@@ -12,7 +12,6 @@ import 'constants.dart';
 
 Widget taxiCardLayout(BuildContext context,var data ){
   TaxiBooking taxiBooking = TaxiBooking(
-    bookingId: data.name,
     referenceNo: data.referenceNo,
     tourType: data.tourType,
     assessmentCode: data.assessmentCode,
