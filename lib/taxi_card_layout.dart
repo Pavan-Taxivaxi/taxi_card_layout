@@ -4,12 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:taxi_card_layout/taxi_booking.dart';
 import 'package:taxi_card_layout/tv_theme.dart';
 
 import 'constants.dart';
 
 
-Widget taxiCardLayout(BuildContext context,String referenceNo,String tourType,String assessmentCode,String pickupDatetime,String pickupLocation,String dropLocation,String statusCompany,String statusTv ){
+Widget taxiCardLayout(BuildContext context,var data ){
+  TaxiBooking taxiBooking = TaxiBooking(
+    bookingId: data.name,
+    referenceNo: data.referenceNo,
+    tourType: data.tourType,
+    assessmentCode: data.assessmentCode,
+    pickupDatetime: data.pickupDatetime,
+    pickupLocation: data.pickupLocation,
+    statusTv: data.statusTv,
+    statusCompany: data.statusCompany,
+  );
+
   DateTime formattedDate(String strDate){
     DateTime formatter = DateFormat('dd MMM yyyy - HH:mm a').parse(strDate);
     DateTime inputDate = DateTime.parse(formatter.toString());
@@ -34,18 +46,18 @@ Widget taxiCardLayout(BuildContext context,String referenceNo,String tourType,St
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: Text(referenceNo.toString(),style: GoogleFonts.lato(fontSize: Constants.subHeader, fontWeight: FontWeight.w600,color: TVTheme.primaryColor),),
+                child: Text(taxiBooking.referenceNo.toString(),style: GoogleFonts.lato(fontSize: Constants.subHeader, fontWeight: FontWeight.w600,color: TVTheme.primaryColor),),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
-                child: Text(tourType.toString(),style: GoogleFonts.lato(fontSize: Constants.subHeader,fontWeight: FontWeight.w600,color: TVTheme.primaryColor),),
+                child: Text(taxiBooking.tourType.toString(),style: GoogleFonts.lato(fontSize: Constants.subHeader,fontWeight: FontWeight.w600,color: TVTheme.primaryColor),),
               ),
             ],
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: Text("Assessment Code - ${assessmentCode.toString()}",style: GoogleFonts.lato(fontSize: Constants.subHeader,fontWeight: FontWeight.w500,color: TVTheme.blackColor)),
+          child: Text("Assessment Code - ${taxiBooking.assessmentCode.toString()}",style: GoogleFonts.lato(fontSize: Constants.subHeader,fontWeight: FontWeight.w500,color: TVTheme.blackColor)),
         ),
         const Divider(height: 2),
         Padding(
@@ -57,9 +69,9 @@ Widget taxiCardLayout(BuildContext context,String referenceNo,String tourType,St
                 flex: 2,
                 child: Column(
                   children: [
-                    Text("${formattedDate(pickupDatetime).day}",style: GoogleFonts.ubuntu(fontWeight: FontWeight.w700,fontSize: Constants.title),),
-                    Text("${formattedMonth(formattedDate(pickupDatetime))} ${formattedDate(pickupDatetime).year}",style: GoogleFonts.ubuntu(fontWeight: FontWeight.w700,fontSize: Constants.subHeader),),
-                    Text(DateFormat.jm().format(formattedDate(pickupDatetime)),style: GoogleFonts.ubuntu(fontWeight: FontWeight.w500,fontSize: Constants.subHeader),),
+                    Text("${formattedDate(taxiBooking.pickupDatetime!).day}",style: GoogleFonts.ubuntu(fontWeight: FontWeight.w700,fontSize: Constants.title),),
+                    Text("${formattedMonth(formattedDate(taxiBooking.pickupDatetime!))} ${formattedDate(taxiBooking.pickupDatetime!).year}",style: GoogleFonts.ubuntu(fontWeight: FontWeight.w700,fontSize: Constants.subHeader),),
+                    Text(DateFormat.jm().format(formattedDate(taxiBooking.pickupDatetime!)),style: GoogleFonts.ubuntu(fontWeight: FontWeight.w500,fontSize: Constants.subHeader),),
                   ],
                 ),
               ),
@@ -74,7 +86,7 @@ Widget taxiCardLayout(BuildContext context,String referenceNo,String tourType,St
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Icon(FontAwesomeIcons.locationDot,size: Constants.iconSizeCard,color: TVTheme.secondColor,),
-                        Expanded(child: Text(" ${pickupLocation.toString()} ",overflow: TextOverflow.ellipsis,maxLines: 1,style: GoogleFonts.lato(fontWeight: FontWeight.w500,fontSize: Constants.subHeader),)),
+                        Expanded(child: Text(" ${taxiBooking.pickupLocation.toString()} ",overflow: TextOverflow.ellipsis,maxLines: 1,style: GoogleFonts.lato(fontWeight: FontWeight.w500,fontSize: Constants.subHeader),)),
                       ],
                     ),
                     const SizedBox(height: 10,),
@@ -85,7 +97,7 @@ Widget taxiCardLayout(BuildContext context,String referenceNo,String tourType,St
                         Icon(FontAwesomeIcons.locationArrow,size:Constants.iconSizeCard,color: TVTheme.secondColor,),
                         Expanded(
                             child: Text(
-                              dropLocation.toString() ==""?" N/A ": " ${pickupLocation.toString()} ",
+                              taxiBooking.dropLocation.toString() ==""?" N/A ": " ${taxiBooking.pickupLocation.toString()} ",
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: GoogleFonts.lato(fontWeight: FontWeight.w500,fontSize: Constants.subHeader),)),
@@ -125,7 +137,7 @@ Widget taxiCardLayout(BuildContext context,String referenceNo,String tourType,St
                       child: Container(
                           alignment:Alignment.topLeft,
                           child: Text(
-                              statusCompany.toString(),
+                              taxiBooking.statusCompany.toString(),
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.lato(
                                   fontWeight: FontWeight.w600,
@@ -175,7 +187,7 @@ Widget taxiCardLayout(BuildContext context,String referenceNo,String tourType,St
                       child: Container(
                           alignment:Alignment.topLeft,
                           child: Text(
-                              statusTv.toString(),
+                              taxiBooking.statusTv.toString(),
                               style: GoogleFonts.lato(
                                   fontWeight: FontWeight.w600,
                                   fontSize: Constants.subHeader
