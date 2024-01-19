@@ -11,7 +11,7 @@ class TaxiBooking {
   String? status;
   String? bookingReason;
   String? assessmentCode;
-  List<CoPassenger>? coPassengers;
+  List<Passenger>? passengers;
   SpocDetails? spocDetails;
   String? isAssign;
   DriverDetails? driverDetails;
@@ -32,7 +32,7 @@ class TaxiBooking {
     this.status,
     this.bookingReason,
     this.assessmentCode,
-    this.coPassengers,
+    this.passengers,
     this.spocDetails,
     this.isAssign,
     this.driverDetails,
@@ -44,14 +44,14 @@ class TaxiBooking {
 
 }
 
-class CoPassenger {
+class Passenger {
   String? peopleName;
   String? peopleContact;
   String? peopleCid;
   String? peopleEmail;
   String? hasDummyEmail;
 
-  CoPassenger({
+  Passenger({
     this.peopleName,
     this.peopleContact,
     this.peopleCid,

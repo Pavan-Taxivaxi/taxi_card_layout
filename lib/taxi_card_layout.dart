@@ -13,14 +13,14 @@ import 'constants.dart';
 
 Widget taxiCardLayout(BuildContext context,var data ){
 
-  List<CoPassenger> passengerList =[];
+  List<Passenger> passengerList =[];
   for(int i=0;i<data.coPassenger.length;i++){
     passengerList.add(
-        CoPassenger(
-            peopleName: data.coPassengers[i].peopleName,
-            peopleContact: data.coPassengers[i].peopleContact,
-            peopleCid: data.coPassengers[i].peopleCid,
-            peopleEmail: data.coPassengers[i].peopleEmail,
+        Passenger(
+          peopleName: data.coPassengers[i].peopleName,
+          peopleContact: data.coPassengers[i].peopleContact,
+          peopleCid: data.coPassengers[i].peopleCid,
+          peopleEmail: data.coPassengers[i].peopleEmail,
         )
     );
   }
@@ -33,7 +33,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
     pickupLocation: data.pickupLocation,
     statusTv: data.statusTv,
     statusCompany: data.statusCompany,
-    coPassengers: passengerList,
+    passengers: passengerList,
   );
 
   DateTime formattedDate(String strDate){
@@ -46,7 +46,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
     return formatter;
   }
 
-  showEmployeeDetails(List<CoPassenger>? people){
+  showEmployeeDetails(List<Passenger>? people){
     showDialog(context: context, builder: (BuildContext buContext){
       return AlertDialog(
         content: SizedBox(
@@ -255,7 +255,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
                                 padding: const EdgeInsets.only(right: 5),
                                 alignment:Alignment.topLeft,
                                 child: Text(
-                                    taxiBooking.coPassengers!.length.toString(),
+                                    taxiBooking.passengers!.length.toString(),
                                     style: GoogleFonts.lato(fontWeight: FontWeight.w600,fontSize: Constants.subHeader)
                                 )
                             ),
