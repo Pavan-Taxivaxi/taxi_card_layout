@@ -12,6 +12,7 @@ import 'constants.dart';
 
 
 Widget taxiCardLayout(BuildContext context,var data ){
+
   TaxiBooking taxiBooking = TaxiBooking(
     referenceNo: data.referenceNo,
     tourType: data.tourType,
@@ -20,7 +21,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
     pickupLocation: data.pickupLocation,
     statusTv: data.statusTv,
     statusCompany: data.statusCompany,
-    coPassengers: data.coPassengers,
+    coPassengers: []
   );
 
   DateTime formattedDate(String strDate){
