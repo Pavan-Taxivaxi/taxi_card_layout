@@ -13,6 +13,17 @@ import 'constants.dart';
 
 Widget taxiCardLayout(BuildContext context,var data ){
 
+  List<CoPassenger> passengerList =[];
+  for(int i=0;i<data.coPassengers.length();i++){
+    passengerList.add(
+        CoPassenger(
+            peopleName: data.coPassengers[i].peopleName,
+            peopleContact: data.coPassengers[i].peopleContact,
+            peopleCid: data.coPassengers[i].peopleCid,
+            peopleEmail: data.coPassengers[i].peopleEmail,
+        )
+    );
+  }
   TaxiBooking taxiBooking = TaxiBooking(
     referenceNo: data.referenceNo,
     tourType: data.tourType,
@@ -21,7 +32,7 @@ Widget taxiCardLayout(BuildContext context,var data ){
     pickupLocation: data.pickupLocation,
     statusTv: data.statusTv,
     statusCompany: data.statusCompany,
-    coPassengers: []
+    coPassengers: passengerList,
   );
 
   DateTime formattedDate(String strDate){
